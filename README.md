@@ -1,8 +1,8 @@
-# Fabric Example Mod
+# 猫猫粒子MOD
 
-## Setup
+## 功能
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+可为指定物品提供装备时的指定粒子效果
 
 ## License
 
