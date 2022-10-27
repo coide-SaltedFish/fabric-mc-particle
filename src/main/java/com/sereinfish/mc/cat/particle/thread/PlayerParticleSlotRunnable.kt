@@ -41,7 +41,7 @@ class PlayerParticleSlotRunnable(
             animation = if (item.isOf(Items.AIR))
                 null
             else
-                NbtUtils.getParticleNBT(item)?.toParticleAnimation()
+                getParticleAnimation(item)
         }
 
         if (animation.isNotNull()) {

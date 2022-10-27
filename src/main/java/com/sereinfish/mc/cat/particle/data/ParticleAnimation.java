@@ -5,6 +5,13 @@ import java.util.ArrayList;
 public class ParticleAnimation {
     public ArrayList<Frame> frames = new ArrayList<>();
 
+    public ParticleAnimation() {
+    }
+
+    public ParticleAnimation(ArrayList<Frame> frames) {
+        this.frames = frames;
+    }
+
     public void addFrame(Frame frame){
         frames.add(frame);
     }

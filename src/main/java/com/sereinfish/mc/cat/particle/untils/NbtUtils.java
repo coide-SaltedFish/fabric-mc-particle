@@ -11,6 +11,7 @@ public class NbtUtils {
     }
 
     public static ParticleNBT getParticleNBT(ItemStack itemStack){
+        if (itemStack == null) return null;
         NbtCompound rootNbt = itemStack.getNbt();
         if (rootNbt == null) return null;
         if (!rootNbt.contains("SFParticle")) return null;

@@ -3,10 +3,13 @@ package com.sereinfish.mc.cat.particle.untils
 import com.google.gson.GsonBuilder
 import com.google.gson.stream.JsonReader
 import com.sereinfish.mc.cat.particle.Start
+import com.sereinfish.mc.cat.particle.data.ParticleAnimation
 import com.sereinfish.mc.cat.particle.data.ParticleAnimationData
 import kotlinx.coroutines.CoroutineScope
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.render.entity.animation.Animation
+import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import java.io.*
 import java.lang.reflect.Type
 import java.util.*
@@ -21,7 +24,7 @@ val AnimationConfigFile = File(FabricLoader.getInstance().configDir.toFile(), "/
         it.mkdirs()
 }
 
-val particleAnimationMap = HashMap<String, ParticleAnimationData>().also { map ->
+val particleAnimationMap = HashMap<String, ParticleAnimation>().also { map ->
     AnimationConfigFile.listFiles()?.forEach { file ->
         println(file.extension)
         if(file.extension.lowercase() == "json"){
@@ -32,7 +35,7 @@ val particleAnimationMap = HashMap<String, ParticleAnimationData>().also { map -
                         if (map.containsKey(file.nameWithoutExtension))
                             Start.logger.error("已存在动画效果：${file.nameWithoutExtension}, 错误：$file")
                         else
-                            map[file.nameWithoutExtension] = particleAnimationData
+                            map[file.nameWithoutExtension] = particleAnimationData.toParticleAnimation()
                     }
                 }
             }catch (e: Exception){
@@ -41,6 +44,40 @@ val particleAnimationMap = HashMap<String, ParticleAnimationData>().also { map -
         }
     }
 }
+
+fun getParticleAnimation(itemStack: ItemStack): ParticleAnimation? =
+    itemStack.nbt?.let { rootNbt ->
+        rootNbt.getCompoundOrNull("SFParticle")?.let {
+            rootNbt.getStringOrNull("animation")?.let { animation ->
+                particleAnimationMap[animation]
+            }
+        }
+    } ?: NbtUtils.getParticleNBT(itemStack)?.toParticleAnimation()
+
+fun NbtCompound.getStringOrNull(key: String): String? =
+    if(contains(key)) getString(key)
+    else null
+
+fun NbtCompound.getLongOrNull(key: String): Long? =
+    if(contains(key)) getLong(key)
+    else null
+
+fun NbtCompound.getBooleanOrNull(key: String): Boolean? =
+    if(contains(key)) getBoolean(key)
+    else null
+
+fun NbtCompound.getIntOrNull(key: String): Int? =
+    if(contains(key)) getInt(key)
+    else null
+
+fun NbtCompound.getFloatOrNull(key: String): Float? =
+    if(contains(key)) getFloat(key)
+    else null
+
+fun NbtCompound.getCompoundOrNull(key: String) =
+    if (this.contains(key))
+        this.getCompound(key)
+    else null
 
 /**
  * 得到一个可控范围随机数
