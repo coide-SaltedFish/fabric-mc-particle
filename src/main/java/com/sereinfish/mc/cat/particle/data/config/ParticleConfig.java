@@ -4,6 +4,7 @@ import com.sereinfish.mc.cat.particle.Start;
 import com.sereinfish.mc.cat.particle.untils.Utils;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ParticleConfig {
@@ -17,11 +18,7 @@ public class ParticleConfig {
         return get(player.getUuidAsString());
     }
 
-    public void save(){
-        try {
-            Utils.fileWrite(Utils.ConfigFile, Utils.toJson(this));
-        }catch (Exception e){
-            Start.logger.error("配置保存错误", e);
-        }
+    public void save() throws IOException {
+        Utils.fileWrite(Utils.ConfigFile, Utils.toJson(this));
     }
 }

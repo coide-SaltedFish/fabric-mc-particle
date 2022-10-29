@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class Utils {
-    public static final String version = "1.0.4-Beta"; //版本名称
+    public static final String version = "1.0.5-Beta"; //版本名称
     private static final String encoding = "UTF-8"; //文件编码
     public static final File ConfigFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), "sereinfish_particle_config.json"); //配置文件路径
     public static final HashMap<String, DefaultParticleType> ParticleMapping = new HashMap<>();

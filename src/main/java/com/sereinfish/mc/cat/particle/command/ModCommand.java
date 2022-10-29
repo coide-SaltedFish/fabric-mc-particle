@@ -159,6 +159,7 @@ public class ModCommand {
                         try {
                             ServerPlayerEntity player = context.getSource().getPlayerOrThrow();
                             player.sendMessage(MutableText.of(new LiteralTextContent("------Mod测试信息------")).formatted(Formatting.GREEN));
+                            player.sendMessage(MutableText.of(new LiteralTextContent("particleContextScope:" + ParticleManager.INSTANCE.particleContextScopeIsActive())).formatted(Formatting.GREEN));
                             player.sendMessage(MutableText.of(new LiteralTextContent("玩家：" + player.getEntityName() + "[" + player.getUuidAsString() + "]")).formatted(Formatting.GREEN));
 
                             Map<EquipmentSlot, PlayerParticleSlotRunnable> map = ParticleManager.INSTANCE.getMap().get(player.getUuidAsString());

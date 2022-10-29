@@ -1,5 +1,10 @@
 package com.sereinfish.mc.cat.particle.thread
 
+import com.sereinfish.mc.cat.particle.untils.ContextScope
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.isActive
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.server.network.ServerPlayerEntity
 
@@ -7,6 +12,7 @@ import net.minecraft.server.network.ServerPlayerEntity
  * 粒子效果管理器
  */
 object ParticleManager {
+    var particleContextScope = ContextScope(Job() + Dispatchers.Default + CoroutineName("ParticleContext"))
     val map = HashMap<String, HashMap<EquipmentSlot, PlayerParticleSlotRunnable>>()
 
     fun add(playerEntity: ServerPlayerEntity){
@@ -47,6 +53,8 @@ object ParticleManager {
             }
         }
     }
+
+    fun particleContextScopeIsActive() = particleContextScope.isActive
 
     fun close(){
         map.forEach { (_, u) ->
