@@ -20,6 +20,13 @@ public class ParticleAnimation {
         frames.remove(index);
     }
 
+    @Override
+    public String toString() {
+        return "ParticleAnimation{" +
+                "frames=" + frames.size() +
+                '}';
+    }
+
     public static class Frame{
         public long delay = 1000L;
         public ArrayList<ParticleNBT> data;

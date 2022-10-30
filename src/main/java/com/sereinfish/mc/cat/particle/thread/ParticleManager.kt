@@ -1,10 +1,8 @@
 package com.sereinfish.mc.cat.particle.thread
 
+import com.sereinfish.mc.cat.particle.Start
 import com.sereinfish.mc.cat.particle.untils.ContextScope
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.*
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.server.network.ServerPlayerEntity
 
@@ -33,7 +31,7 @@ object ParticleManager {
             }
             map.remove(playerEntity.uuidAsString)
         }
-
+        Start.logger.info("已关闭玩家[${playerEntity.entityName}]所有粒子效果")
     }
 
     /**
@@ -62,5 +60,6 @@ object ParticleManager {
                 runnable.close()
             }
         }
+        particleContextScope.cancel()
     }
 }

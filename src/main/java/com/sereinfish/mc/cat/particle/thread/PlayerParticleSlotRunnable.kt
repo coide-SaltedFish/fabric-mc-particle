@@ -139,7 +139,7 @@ class PlayerParticleSlotRunnable(
     }
 
     fun debugInfo()=
-        "${slot.getName()}:\n    [Job: ${job?.isActive}]\n    [item:${item?.name?.string}, animation:${if(animation.isNull()) "null" else "animation"}]"
+        "${slot.getName()}:\n    [Job: ${job?.isActive}]\n    [item:${item?.name?.string}, animation:${if(animation.isNull()) "null" else "${animation}"}]"
 
     /**
      * 取消
@@ -147,6 +147,5 @@ class PlayerParticleSlotRunnable(
     fun close(){
         job?.cancel()
         job = null
-        ParticleManager.particleContextScope.cancel()
     }
 }

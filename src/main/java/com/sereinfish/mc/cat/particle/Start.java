@@ -17,6 +17,6 @@ public class Start implements ModInitializer {
         ModEvents.init();
         ModEvents.botInit();
 
-        logger.info("SereinFish Particle Mod init!");
+        logger.info("SereinFish Particle Mod init! - " + Utils.version);
     }
 }

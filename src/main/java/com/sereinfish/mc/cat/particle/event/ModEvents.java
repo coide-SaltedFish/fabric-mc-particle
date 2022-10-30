@@ -101,6 +101,6 @@ public class ModEvents {
     }
 
     private static boolean isBot(ServerPlayerEntity player){
-        return player.getEntityName().startsWith("bot_") && player.getIp().equals("127.0.0.1");
+        return player.getEntityName().toLowerCase().startsWith("bot_") && player.getIp().equals("127.0.0.1");
     }
 }
